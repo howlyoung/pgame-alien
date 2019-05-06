@@ -1,6 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
+from alien import Alien
 
 def check_events(ship,ai_settings,screen,bullets):
     for event in pygame.event.get():
@@ -29,15 +30,39 @@ def check_keydown_events(event,ship,ai_settings,bullets,screen):
             new_bullet = Bullet(ai_settings, screen, ship)
             bullets.add(new_bullet)
 
-def update_screen(ai_settings,screen,ship,alien,bullets):
+def update_screen(ai_settings,screen,ship,aliens,bullets):
     screen.fill(ai_settings.bg_color)
     ship.blitme()
-    alien.blitme()
+    # alien.blitme()
+    for alien in aliens.sprites():
+        alien.blitme()
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     pygame.display.flip()
 
-def update_bullets(bullets):
+def update_bullets(bullets,aliens):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+        fit_flag = False
+        for alien in aliens.copy():
+            if bullet.rect.x > alien.rect.x and bullet.rect.x < (
+                    alien.rect.x + alien.width) and bullet.rect.y > alien.rect.y and bullet.rect.y < (
+                    alien.rect.y + alien.rect.height):
+                # 命中
+                aliens.remove(alien)
+                fit_flag = True
+                break
+        if fit_flag == True:
+            bullets.remove(bullet)
+
+def defend_aliens(aliens,count,ai_settings,screen):
+    if len(aliens) == 0:
+        sapcing = 30
+        tmp = 0
+        while(count > 0):
+            alien = Alien(ai_settings,screen)
+            aliens.add(alien)
+            alien.rect.x += tmp
+            tmp = alien.rect.x + alien.width + sapcing
+            count -= 1
