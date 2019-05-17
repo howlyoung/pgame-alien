@@ -61,7 +61,7 @@ def defend_aliens(aliens,count,ai_settings,screen):
         sapcing = 30
         tmp = 0
         while(count > 0):
-            alien = Alien(ai_settings,screen)
+            alien = Alien(ai_settings.alienSetting(),screen)
             aliens.add(alien)
             alien.rect.x += tmp
             tmp = alien.rect.x + alien.width + sapcing

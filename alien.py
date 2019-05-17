@@ -4,10 +4,11 @@ from pygame.sprite import Sprite
 
 class Alien(Sprite):
 
-    def __init__(self,ai_settings,screen):
+    def __init__(self,AlienSetting,screen):
         super().__init__()
         self.screen = screen
-        self.ai_settings = ai_settings
+        #self.ai_settings = ai_settings
+        self.setting = AlienSetting
 
         self.image = pygame.image.load('Alien.png')
         self.rect = self.image.get_rect()
@@ -24,7 +25,7 @@ class Alien(Sprite):
         self.screen.blit(self.image,self.rect)
 
     def update(self):
-        if self.move_flag >= self.ai_settings.alien_move_interval:
+        if self.move_flag >= self.setting.move_interval:
             self.rect.y += 1
             self.move_flag = 0
         else:

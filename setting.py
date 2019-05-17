@@ -1,3 +1,8 @@
+import collections
+
+
+AlienSetting = collections.namedtuple('AlienSetting',['move_interval'])
+ShipSetting = collections.namedtuple('ShipSetting',['speed_factor'])
 class Setting():
 
     def __init__(self):
@@ -13,3 +18,9 @@ class Setting():
         self.bullet_color = (60,60,60)
         self.bullets_allowed = 3
         self.alien_move_interval = 80 #毫秒
+
+    def alienSetting(self):
+        return AlienSetting(self.alien_move_interval)
+
+    def shipSetting(self):
+        return ShipSetting(self.ship_speed_factor)
