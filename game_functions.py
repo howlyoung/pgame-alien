@@ -55,14 +55,3 @@ def update_bullets(bullets,aliens):
                 break
         if fit_flag == True:
             bullets.remove(bullet)
-
-def defend_aliens(aliens,count,ai_settings,screen):
-    if len(aliens) == 0:
-        sapcing = 30
-        tmp = 0
-        while(count > 0):
-            alien = Alien(ai_settings.alienSetting(),screen)
-            aliens.add(alien)
-            alien.rect.x += tmp
-            tmp = alien.rect.x + alien.width + sapcing
-            count -= 1

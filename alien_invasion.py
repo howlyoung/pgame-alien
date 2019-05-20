@@ -16,9 +16,8 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
     ship = Ship(screen,ai_settings.shipSetting())
     bullets = Group()
-    aliens = Group()
-    gf.defend_aliens(aliens,5,ai_settings,screen)
-    # alien = Alien(ai_settings,screen)
+    aset = ai_settings.alienSetting()
+    aliens = Alien.getAliens(aset,screen)
 
     while True:
         gf.check_events(ship,ai_settings,screen,bullets)

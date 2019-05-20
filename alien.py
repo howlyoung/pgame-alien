@@ -1,6 +1,7 @@
 #1
 import pygame
 from pygame.sprite import Sprite
+from pygame.sprite import Group
 
 class Alien(Sprite):
 
@@ -30,3 +31,19 @@ class Alien(Sprite):
             self.move_flag = 0
         else:
             self.move_flag += 1
+
+
+    @classmethod
+    def getAliens(cls,setting,screen):
+        aliens = Group()
+        sapcing = 30
+        tmp = 0
+        count = 6
+        while(count > 0):
+            alien = Alien(setting,screen)
+            aliens.add(alien)
+            alien.rect.x += tmp
+            tmp = alien.rect.x + alien.width + sapcing
+            count -= 1
+        return aliens
+
