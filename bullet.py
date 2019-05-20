@@ -26,6 +26,10 @@ class Bullet(Sprite):
             if self.rect.bottom <= 0:
                 self.show_flag = False 
 
+    #发射子弹            
+    def shoot_bullet(self,ship):
+        self.rect.centerx = ship.rect.centerx
+        self.rect.top = ship.rect.top
 
     def draw_bullet(self):
         pygame.draw.rect(self.screen,self.color,self.rect)
