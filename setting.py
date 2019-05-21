@@ -1,26 +1,36 @@
 import collections
 
+# 各个配置的元组
+AlienSetting = collections.namedtuple('AlienSetting', ['move_interval'])
+ShipSetting = collections.namedtuple('ShipSetting', ['speed_factor'])
+BulletSetting = collections.namedtuple(
+    'BulletSetting', ['speed_factor', 'width', 'height', 'allowed', 'color'])
 
-AlienSetting = collections.namedtuple('AlienSetting',['move_interval'])
-ShipSetting = collections.namedtuple('ShipSetting',['speed_factor'])
+
 class Setting():
 
     def __init__(self):
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (230,230,230)
+        self.bg_color = (230, 230, 230)
 
         self.ship_speed_factor = 1.5
 
         self.bullet_speed_factor = 1
         self.bullet_width = 3
         self.bullet_height = 15
-        self.bullet_color = (60,60,60)
+        self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 3
-        self.alien_move_interval = 80 #毫秒
+        # 毫秒
+        self.alien_move_interval = 80
 
     def alienSetting(self):
         return AlienSetting(self.alien_move_interval)
 
     def shipSetting(self):
         return ShipSetting(self.ship_speed_factor)
+
+    def bulletSetting(self):
+        return BulletSetting(self.bullet_speed_factor,
+                             self.bullet_width, self.bullet_height,
+                             self.bullets_allowed, self.bullet_color)

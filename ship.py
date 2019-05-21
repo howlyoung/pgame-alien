@@ -1,8 +1,9 @@
 import pygame
 
+
 class Ship():
 
-    def __init__(self,screen,shipSetting):
+    def __init__(self, screen, shipSetting):
         self.screen = screen
         self.setting = shipSetting
 
@@ -19,7 +20,7 @@ class Ship():
         self.move_left = False
 
     def blitme(self):
-        self.screen.blit(self.image,self.rect)
+        self.screen.blit(self.image, self.rect)
 
     def update(self):
         if self.move_right and self.rect.right < self.screen_rect.right:
@@ -29,3 +30,14 @@ class Ship():
 
         self.rect.centerx = self.center
 
+    def getCenterx(self):
+        return self.rect.centerx
+
+    def getTop(self):
+        return self.rect.top
+
+    # 发射子弹
+    def shoot_bullet(self, bullets):
+        for bullet in bullets:
+            if bullet.shoot_bullet(self):
+                break
