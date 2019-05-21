@@ -42,16 +42,17 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 
 
 def update_bullets(bullets, aliens):
-    for bullet in bullets.copy():
-        fit_flag = False
-        for alien in aliens.copy():
-            if (bullet.rect.x > alien.rect.x and bullet.rect.x < (
+    for bullet in bullets:
+        if bullet.show_flag is True:
+            fit_flag = False
+            for alien in aliens:
+                if (bullet.rect.x > alien.rect.x and bullet.rect.x < (
                     alien.rect.x + alien.width) and
                     bullet.rect.y > alien.rect.y and bullet.rect.y < (
-                    alien.rect.y + alien.rect.height)):
-                # 命中
-                aliens.remove(alien)
-                fit_flag = True
-                break
-        if fit_flag is True:
-            bullet.hidden_bullet()
+                        alien.rect.y + alien.rect.height)):
+                    # 命中
+                    aliens.remove(alien)
+                    fit_flag = True
+                    break
+            if fit_flag is True:
+                bullet.hidden_bullet()
