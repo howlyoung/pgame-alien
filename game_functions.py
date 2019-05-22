@@ -42,17 +42,8 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 
 
 def update_bullets(bullets, aliens):
-    for bullet in bullets:
-        if bullet.show_flag is True:
-            fit_flag = False
-            for alien in aliens:
-                if (bullet.rect.x > alien.rect.x and bullet.rect.x < (
-                    alien.rect.x + alien.width) and
-                    bullet.rect.y > alien.rect.y and bullet.rect.y < (
-                        alien.rect.y + alien.rect.height)):
-                    # 命中
-                    aliens.remove(alien)
-                    fit_flag = True
-                    break
-            if fit_flag is True:
-                bullet.hidden_bullet()
+    # 如果有碰撞，则字典里会包含碰撞的两个矩形
+    collisions = pygame.sprite.groupcollide(bullets, aliens, False, True)
+    if collisions:
+        for bullet, alien in collisions.items():
+            bullet.hidden_bullet()
