@@ -37,13 +37,13 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     for alien in aliens.sprites():
         alien.blitme()
     for bullet in bullets.sprites():
-        bullet.draw_bullet()
+        bullet.draw_bullet(screen)
     pygame.display.flip()
 
 
 def update_bullets(bullets, aliens):
     # 如果有碰撞，则字典里会包含碰撞的两个矩形
-    collisions = pygame.sprite.groupcollide(bullets, aliens, False, True)
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if collisions:
         for bullet, alien in collisions.items():
-            bullet.hidden_bullet()
+            bullet.hit_target()

@@ -1,4 +1,5 @@
 import pygame
+from bullet.bullet_normal import BulletNormal
 
 
 class Ship():
@@ -15,6 +16,7 @@ class Ship():
         self.rect.bottom = self.screen_rect.bottom
 
         self.center = float(self.rect.centerx)
+        self.bullet = BulletNormal(self)
 
         self.move_right = False
         self.move_left = False
@@ -38,6 +40,11 @@ class Ship():
 
     # 发射子弹
     def shoot_bullet(self, bullets):
+        '''
         for bullet in bullets:
             if bullet.shoot_bullet(self):
                 break
+        '''
+        bs = self.bullet.shoot_bullet()
+        if bs:
+            bullets.add(bs)
