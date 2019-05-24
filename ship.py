@@ -1,5 +1,4 @@
 import pygame
-from bullet.bullet_normal import BulletNormal
 
 
 class Ship():
@@ -16,10 +15,24 @@ class Ship():
         self.rect.bottom = self.screen_rect.bottom
 
         self.center = float(self.rect.centerx)
-        self.bullet = BulletNormal(self)
+        self.bullets = []
 
         self.move_right = False
         self.move_left = False
+
+    # 增加新子弹类型
+    def add_bullet(self, bullet):
+        if bullet.set_owner(self):
+            self.bullets.append(bullet)
+
+    # 移除子弹
+    def remove_bullet(self, bullet):
+        if bullet.clear_owner(self):
+            self.bullets.remove(bullet)
+
+    # 获取当前使用子弹
+    def get_current_bullet(self):
+        return self.bullets[0]
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
@@ -39,12 +52,11 @@ class Ship():
         return self.rect.top
 
     # 发射子弹
-    def shoot_bullet(self, bullets):
-        '''
-        for bullet in bullets:
-            if bullet.shoot_bullet(self):
-                break
-        '''
-        bs = self.bullet.shoot_bullet()
-        if bs:
-            bullets.add(bs)
+    def shoot_bullet(self):
+        self.get_current_bullet().shoot_bullet()
+
+    # 切换子弹
+    def change_bullet(self):
+        if len(self.bullets) > 1:
+            self.bullets[-1], self.bullets[0] = (
+                self.bullets[0], self.bullets[1])

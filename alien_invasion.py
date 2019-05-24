@@ -2,9 +2,10 @@ import pygame
 from setting import Setting
 from ship import Ship
 from alien import Alien
-# from bullet import Bullet
-from pygame.sprite import Group
 import game_functions as gf
+from bullet.bullet import Bullet
+from bullet.bullet_double import BulletDouble
+from bullet.bullet_normal import BulletNormal
 
 
 def run_game():
@@ -14,10 +15,12 @@ def run_game():
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
     ship = Ship(screen, ai_settings.shipSetting())
-    # bullets = Bullet.getBullets(ai_settings.bulletSetting(), screen)
-    bullets = Group()
-    aset = ai_settings.alienSetting()
-    aliens = Alien.getAliens(aset, screen)
+    bullets = Bullet.get_overall_sprites()
+    aliens = Alien.getAliens(ai_settings.alienSetting(), screen)
+    b = BulletDouble(ai_settings.bulletSetting())
+    b1 = BulletNormal(ai_settings.bulletSetting())
+    ship.add_bullet(b)
+    ship.add_bullet(b1)
 
     while True:
         gf.check_events(ship, ai_settings, screen, bullets)

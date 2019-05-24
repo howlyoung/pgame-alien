@@ -27,7 +27,9 @@ def check_keydown_events(event, ship, ai_settings, bullets, screen):
     elif event.key == pygame.K_LEFT:
         ship.move_left = True
     elif event.key == pygame.K_SPACE:
-        ship.shoot_bullet(bullets)
+        ship.shoot_bullet()
+    elif event.key == pygame.K_r:
+        ship.change_bullet()
 
 
 def update_screen(ai_settings, screen, ship, aliens, bullets):

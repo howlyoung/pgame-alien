@@ -4,7 +4,8 @@ import collections
 AlienSetting = collections.namedtuple('AlienSetting', ['move_interval'])
 ShipSetting = collections.namedtuple('ShipSetting', ['speed_factor'])
 BulletSetting = collections.namedtuple(
-    'BulletSetting', ['speed_factor', 'width', 'height', 'allowed', 'color'])
+    'BulletSetting',
+    ['speed_factor', 'width', 'height', 'allow', 'color', 'damage'])
 
 
 class Setting():
@@ -20,7 +21,8 @@ class Setting():
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
-        self.bullets_allowed = 3
+        self.bullets_allow = 3
+        self.damage = 0
         # 毫秒
         self.alien_move_interval = 80
 
@@ -33,4 +35,5 @@ class Setting():
     def bulletSetting(self):
         return BulletSetting(self.bullet_speed_factor,
                              self.bullet_width, self.bullet_height,
-                             self.bullets_allowed, self.bullet_color)
+                             self.bullets_allow, self.bullet_color,
+                             self.damage)
