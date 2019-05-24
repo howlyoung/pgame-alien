@@ -1,5 +1,7 @@
 import sys
 import pygame
+from pygame.sprite import Group
+from unit.unit_alien import UnitAlien
 
 
 def check_events(ship, ai_settings, screen, bullets):
@@ -49,3 +51,17 @@ def update_bullets(bullets, aliens):
     if collisions:
         for bullet, alien in collisions.items():
             bullet.hit_target()
+
+
+def alien_list(screen, setting):
+        aliens = Group()
+        sapcing = 30
+        tmp = 0
+        count = 6
+        while(count > 0):
+            alien = UnitAlien(screen, setting)
+            aliens.add(alien)
+            alien.rect.x += tmp
+            tmp = alien.rect.x + alien.width + sapcing
+            count -= 1
+        return aliens
