@@ -19,3 +19,6 @@ class UnitAlien(Unit):
             self.move_flag = 0
         else:
             self.move_flag += 1
+
+    def set_poisition(self, poisition):
+        self.rect.x = poisition['x']

@@ -1,7 +1,7 @@
 import pygame
 from setting import Setting
 from unit.unit import Unit
-from unit.unit_ship import UnitShip
+from level.level_one import LevelOne
 import game_functions as gf
 from bullet.bullet import Bullet
 from bullet.bullet_double import BulletDouble
@@ -20,7 +20,9 @@ def run_game():
     ship.set_poisition({'centerx': rect.centerx, 'bottom': rect.bottom})
     ship.set_boundary({'left': 0, 'right': rect.right})
     bullets = Bullet.get_overall_sprites()
-    aliens = gf.alien_list(ai_settings.alienSetting())
+    level = LevelOne()
+    level.load()
+    aliens = level.group
     b = BulletDouble(ai_settings.bulletSetting())
     b1 = BulletNormal(ai_settings.bulletSetting())
     ship.add_bullet(b)
@@ -33,6 +35,7 @@ def run_game():
         aliens.update()
         gf.update_bullets(bullets, aliens)
         gf.update_screen(ai_settings, screen, ship, aliens, bullets)
+        level.run()
 
 
 run_game()
