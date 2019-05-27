@@ -1,7 +1,10 @@
 import sys
 import pygame
 from pygame.sprite import Group
+from unit.unit import Unit
 from unit.unit_alien import UnitAlien
+from unit.unit_ship import UnitShip
+from setting import Setting
 
 
 def check_events(ship, ai_settings, screen, bullets):
@@ -36,10 +39,10 @@ def check_keydown_events(event, ship, ai_settings, bullets, screen):
 
 def update_screen(ai_settings, screen, ship, aliens, bullets):
     screen.fill(ai_settings.bg_color)
-    ship.blitme()
+    ship.blitme(screen)
     # alien.blitme()
     for alien in aliens.sprites():
-        alien.blitme()
+        alien.blitme(screen)
     for bullet in bullets.sprites():
         bullet.draw_bullet(screen)
     pygame.display.flip()
@@ -53,15 +56,22 @@ def update_bullets(bullets, aliens):
             bullet.hit_target()
 
 
-def alien_list(screen, setting):
+def alien_list(setting):
         aliens = Group()
         sapcing = 30
         tmp = 0
         count = 6
         while(count > 0):
-            alien = UnitAlien(screen, setting)
+            alien = Unit.create_unit('Alien')
             aliens.add(alien)
             alien.rect.x += tmp
             tmp = alien.rect.x + alien.width + sapcing
             count -= 1
         return aliens
+
+
+# 注册unit的配置文件，需要改进
+def register_unit():
+    setting = Setting()
+    UnitShip.add_unit(setting.shipSetting())
+    UnitAlien.add_unit(setting.alienSetting())

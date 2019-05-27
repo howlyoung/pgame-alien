@@ -3,8 +3,8 @@ from unit.unit import Unit
 
 class UnitAlien(Unit):
 
-    def __init__(self, screen, setting):
-        super().__init__(screen, setting)
+    def __init__(self, setting):
+        super().__init__(setting)
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
 

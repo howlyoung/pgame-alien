@@ -1,19 +1,24 @@
 import pygame
 from pygame.sprite import Sprite
+import importlib
 
 
 class Unit(Sprite):
 
-    def __init__(self, screen, setting):
+    # 配置字典
+    setting_list = {}
+
+    def __init__(self, setting):
         super().__init__()
-        self.screen = screen
         self.setting = setting
 
         self.image = pygame.image.load(setting.image)
         self.rect = self.image.get_rect()
-        self.screen_rect = screen.get_rect()
 
         self.bullets = []
+
+    def set_poisition(self):
+        pass
 
     # 增加新子弹类型
     def add_bullet(self, bullet):
@@ -30,8 +35,8 @@ class Unit(Sprite):
         return self.bullets[0]
 
     # 绘制单元
-    def blitme(self):
-        self.screen.blit(self.image, self.rect)
+    def blitme(self, screen):
+        screen.blit(self.image, self.rect)
 
     def update(self):
         pass
@@ -53,3 +58,17 @@ class Unit(Sprite):
         if len(self.bullets) > 1:
             self.bullets[-1], self.bullets[0] = (
                 self.bullets[0], self.bullets[1])
+
+    # 创建对象，根据名字动态的导入模块，从list中获取已经注册好的配置
+    @staticmethod
+    def create_unit(name):
+        module_name = 'unit.unit_' + name.lower()
+        module = importlib.import_module(module_name)
+        className = 'Unit' + name
+        cls = getattr(module, className)
+        return cls(cls.setting_list[cls])
+
+    # 将配置注册到类变量中，创建对象时从list中获取
+    @classmethod
+    def add_unit(cls, setting):
+        cls.setting_list[cls] = setting

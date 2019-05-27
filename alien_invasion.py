@@ -1,5 +1,6 @@
 import pygame
 from setting import Setting
+from unit.unit import Unit
 from unit.unit_ship import UnitShip
 import game_functions as gf
 from bullet.bullet import Bullet
@@ -10,12 +11,16 @@ from bullet.bullet_normal import BulletNormal
 def run_game():
     pygame.init()
     ai_settings = Setting()
+    gf.register_unit()
     screen = pygame.display.set_mode(
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
-    ship = UnitShip(screen, ai_settings.shipSetting())
+    ship = Unit.create_unit('Ship')
+    rect = screen.get_rect()
+    ship.set_poisition({'centerx': rect.centerx, 'bottom': rect.bottom})
+    ship.set_boundary({'left': 0, 'right': rect.right})
     bullets = Bullet.get_overall_sprites()
-    aliens = gf.alien_list(screen, ai_settings.alienSetting())
+    aliens = gf.alien_list(ai_settings.alienSetting())
     b = BulletDouble(ai_settings.bulletSetting())
     b1 = BulletNormal(ai_settings.bulletSetting())
     ship.add_bullet(b)
