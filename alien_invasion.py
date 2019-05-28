@@ -1,7 +1,6 @@
 import pygame
 from setting import Setting
 from unit.unit import Unit
-from level.level_one import LevelOne
 from level.level_manager import LevelManager
 import game_functions as gf
 from bullet.bullet import Bullet
