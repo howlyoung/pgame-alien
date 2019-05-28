@@ -4,13 +4,13 @@ from pygame.sprite import Group
 import sys
 
 
-class LevelOne(Level):
+class LevelTwo(Level):
 
     def __init__(self):
         super().__init__()
         self.unit_type_list = {'Alien': 10}
         self.group = Group()
-        self.unit_current_count = 6
+        self.unit_current_count = 3
         self.unit_exist_count = 0
 
     def load(self):
@@ -31,14 +31,9 @@ class LevelOne(Level):
                     self._create_unit(unit_type, 1)
                     self.unit_exist_count += 1
 
-    def is_end(self):
-        if len(self.group) <= 0:
-            return True
-        return False
-
     def end(self):
-        print('win')
-        self.group.empty()
+        print('win11')
+        sys.exit()
 
     # 生成单元
     def _create_unit(self, unit_type, count):
