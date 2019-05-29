@@ -1,7 +1,9 @@
 from level.level import Level
 from unit.unit import Unit
-from pygame.sprite import Group
 import sys
+from bullet.bullet_double import BulletDouble
+from bullet.bullet_normal import BulletNormal
+from setting import Setting
 
 
 class LevelTwo(Level):
@@ -9,11 +11,12 @@ class LevelTwo(Level):
     def __init__(self):
         super().__init__()
         self.unit_type_list = {'Alien': 10}
-        self.group = Group()
         self.unit_current_count = 3
         self.unit_exist_count = 0
+        self.setting = Setting()
 
     def load(self):
+        super().load()
         rect = self.screen.get_rect()
         self.ship.set_poisition(
             {'centerx': rect.centerx, 'bottom': rect.bottom})
@@ -21,15 +24,20 @@ class LevelTwo(Level):
         for unit_type, unit_count in self.unit_type_list.items():
             self._create_unit(unit_type, self.unit_current_count)
             self.unit_exist_count += self.unit_current_count
+        b = BulletDouble(self.setting.bulletSetting())
+        b1 = BulletNormal(self.setting.bulletSetting())
+        self.ship.add_bullet(b)
+        self.ship.add_bullet(b1)
 
     def run(self):
-        if len(self.group) <= 0:
+        if len(self.unit_list) <= 0:
             self.end()
-        if len(self.group) < self.unit_current_count:
+        if len(self.unit_list) < self.unit_current_count:
             for unit_type, unit_count in self.unit_type_list.items():
                 if self.unit_exist_count < unit_count:
                     self._create_unit(unit_type, 1)
                     self.unit_exist_count += 1
+        super().run()
 
     def end(self):
         print('win11')
@@ -45,4 +53,4 @@ class LevelTwo(Level):
             alien.rect.x += x
             x = alien.rect.x + alien.width + sapcing
             tmp += 1
-            self.group.add(alien)
+            self.unit_list.add(alien)

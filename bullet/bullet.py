@@ -77,3 +77,7 @@ class Bullet():
     @classmethod
     def create_bullet(ctl, setting):
         return ctl(setting)
+
+    @classmethod
+    def clear_list(cls):
+        cls.overall_sprites.empty()

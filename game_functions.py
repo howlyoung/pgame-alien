@@ -7,12 +7,12 @@ from unit.unit_ship import UnitShip
 from setting import Setting
 
 
-def check_events(ship, ai_settings, screen, bullets):
+def check_events(ship):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ship, ai_settings, bullets, screen)
+            check_keydown_events(event, ship)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
@@ -24,7 +24,7 @@ def check_keyup_events(event, ship):
         ship.move_left = False
 
 
-def check_keydown_events(event, ship, ai_settings, bullets, screen):
+def check_keydown_events(event, ship):
     if event.key == pygame.K_q:
         sys.exit()
     elif event.key == pygame.K_RIGHT:
