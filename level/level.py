@@ -32,8 +32,10 @@ class Level():
         self.unit_list.update()
         self.bullet_sprites.update()
         gf.update_bullets(self.bullet_sprites, self.unit_list)
-        self.screen.fill((230, 230, 230))
+        self.__render()
 
+    def __render(self):
+        self.screen.fill((230, 230, 230))
         for unit in self.unit_list:
             unit.blitme(self.screen)
         for bullet in self.bullet_sprites:
