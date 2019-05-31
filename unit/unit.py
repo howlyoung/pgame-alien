@@ -17,6 +17,8 @@ class Unit(Sprite):
 
         self.bullets = []
 
+        self.exist_flag = True
+
     def set_poisition(self):
         pass
 
@@ -58,6 +60,10 @@ class Unit(Sprite):
         if len(self.bullets) > 1:
             self.bullets[-1], self.bullets[0] = (
                 self.bullets[0], self.bullets[1])
+
+    # 被命中
+    def is_hit(self, bulletsprites):
+        pass
 
     # 创建对象，根据名字动态的导入模块，从list中获取已经注册好的配置
     @staticmethod

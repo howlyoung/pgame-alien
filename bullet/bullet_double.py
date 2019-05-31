@@ -52,6 +52,6 @@ class BulletDouble(Bullet):
     def getTop(self):
         return self.owner.getTop()
 
-    def hit_target(self, bulletSprite):
+    def hit_target(self, bulletSprite, target):
         if bulletSprite in self.sprites:
             self.sprites.remove(bulletSprite)

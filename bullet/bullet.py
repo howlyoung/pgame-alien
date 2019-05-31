@@ -48,7 +48,7 @@ class Bullet():
     def shoot_bullet(self):
         pass
 
-    def hit_target(self):
+    def hit_target(self, bulletsprite, target):
         pass
 
     def update_spriet_track(self, bulletSprite):

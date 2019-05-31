@@ -22,6 +22,8 @@ class BulletSprite(Sprite):
         self.index = 0
         # 如果子弹是多发的，标记是其中的第几发
         self.bullet_index = 0
+        # 是否存在于碰撞列表
+        self.exist_flag = True
 
     def update(self):
         # 具体的轨迹计算，由子弹类提供算法
@@ -53,5 +55,13 @@ class BulletSprite(Sprite):
             return False
 
     # 命中目标的处理
-    def hit_target(self):
-        self.bullet.hit_target(self)
+    def hit_target(self, target):
+        self.bullet.hit_target(self, target)
+
+    # 子弹消失
+    def destroy(self):
+        self.exist_flag = False
+
+    # 获取发射子弹的对象
+    def get_shooter(self):
+        return self.bullet.owner

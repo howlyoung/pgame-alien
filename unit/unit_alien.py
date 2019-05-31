@@ -22,3 +22,8 @@ class UnitAlien(Unit):
 
     def set_poisition(self, poisition):
         self.rect.x = poisition['x']
+
+    def is_hit(self, bulletsprites):
+        # 判断是否自己发出的子弹
+        if self != bulletsprites.get_shooter():
+            self.exist_flag = False
