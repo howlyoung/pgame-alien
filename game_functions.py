@@ -7,12 +7,12 @@ from unit.unit_ship import UnitShip
 from setting import Setting
 
 
-def check_events(ship):
+def check_events(ship, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ship)
+            check_keydown_events(event, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
@@ -24,7 +24,7 @@ def check_keyup_events(event, ship):
         ship.move_left = False
 
 
-def check_keydown_events(event, ship):
+def check_keydown_events(event, ship, bullets):
     if event.key == pygame.K_q:
         sys.exit()
     elif event.key == pygame.K_RIGHT:
@@ -32,7 +32,8 @@ def check_keydown_events(event, ship):
     elif event.key == pygame.K_LEFT:
         ship.move_left = True
     elif event.key == pygame.K_SPACE:
-        ship.shoot_bullet()
+        bs = ship.shoot_bullet()
+        bullets.add(bs)
     elif event.key == pygame.K_r:
         ship.change_bullet()
 
@@ -50,10 +51,16 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 
 def update_bullets(bullets, aliens):
     # 如果有碰撞，则字典里会包含碰撞的两个矩形
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    collisions = pygame.sprite.groupcollide(aliens, bullets, False, False)
     if collisions:
-        for bullet, alien in collisions.items():
-            bullet.hit_target()
+        for alien, bullet in collisions.items():
+            # bullet.hit_target()
+            for b in bullet:
+                alien.is_hit(b)
+                if b.exist_flag is False:
+                    bullets.remove(b)
+            if alien.exist_flag is False:
+                aliens.remove(alien)
 
 
 def alien_list(setting):

@@ -1,5 +1,5 @@
 from pygame.sprite import Group
-from bullet.bullet import Bullet
+# from bullet.bullet import Bullet
 import game_functions as gf
 import importlib
 import pygame
@@ -12,7 +12,8 @@ class Level():
         self.unit_type_list = {}
         # 单元的精灵组，可以考虑做成类变量，应该定义在基类
         self.unit_list = Group()
-        self.bullet_sprites = Bullet.get_overall_sprites()
+        # self.bullet_sprites = Bullet.get_overall_sprites()
+        self.bullet_sprites = Group()
 
     def set_ship(self, ship):
         self.ship = ship
@@ -28,7 +29,7 @@ class Level():
 
     # 运行关卡
     def run(self):
-        gf.check_events(self.ship)
+        gf.check_events(self.ship, self.bullet_sprites)
         self.unit_list.update()
         self.bullet_sprites.update()
         gf.update_bullets(self.bullet_sprites, self.unit_list)

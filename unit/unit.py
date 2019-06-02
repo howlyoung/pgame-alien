@@ -53,7 +53,7 @@ class Unit(Sprite):
     def shoot_bullet(self):
         bullet = self.get_current_bullet()
         if bullet:
-            bullet.shoot_bullet()
+            return bullet.shoot_bullet()
 
     # 切换子弹
     def change_bullet(self):

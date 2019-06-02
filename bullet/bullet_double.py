@@ -16,6 +16,7 @@ class BulletDouble(Bullet):
     # 生成子弹精灵，将精灵加入子弹列表，返回子弹精灵，以便后续将其加入全局的精灵组
     def shoot_bullet(self):
         index = self._get_limit()
+        tmp = []
         if index < self.allow:
             count = 2
             while count > 0:
@@ -23,10 +24,12 @@ class BulletDouble(Bullet):
                 bs.index = index
                 bs.bullet_index += 1
                 self.sprites.append(bs)
-                self.add_overall_sprites(bs)
+                # self.add_overall_sprites(bs)
+                tmp.append(bs)
                 if count == 1:
                     bs.rect.centerx += 5
                 count -= 1
+        return tmp
 
     # 获取发射限制
     def _get_limit(self):
@@ -40,7 +43,8 @@ class BulletDouble(Bullet):
         if bulletSprite in self.sprites:
             if bulletSprite.out_side():
                 self.remove_overall_sprites(bulletSprite)
-                self.sprites.remove(bulletSprite)
+                # self.sprites.remove(bulletSprite)
+                bulletSprite.destroy()
             else:
                 position = bulletSprite.get_position()
                 position['y'] -= 1
@@ -55,3 +59,4 @@ class BulletDouble(Bullet):
     def hit_target(self, bulletSprite, target):
         if bulletSprite in self.sprites:
             self.sprites.remove(bulletSprite)
+            bulletSprite.destroy()

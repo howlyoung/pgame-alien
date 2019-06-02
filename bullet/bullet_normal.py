@@ -19,12 +19,14 @@ class BulletNormal(Bullet):
         if len(self.sprites) < self.allow:
             bs = BulletSprite(self.setting, self)
             self.sprites.append(bs)
-            self.add_overall_sprites(bs)
+            # self.add_overall_sprites(bs)
+            return bs
 
     def update_spriet_track(self, bulletSprite):
         if bulletSprite in self.sprites:
             if bulletSprite.out_side():
-                self.remove_overall_sprites(bulletSprite)
+                # self.remove_overall_sprites(bulletSprite)
+                bulletSprite.destroy()
                 self.sprites.remove(bulletSprite)
             else:
                 position = bulletSprite.get_position()
@@ -40,3 +42,4 @@ class BulletNormal(Bullet):
     def hit_target(self, bulletSprite, target):
         if bulletSprite in self.sprites:
             self.sprites.remove(bulletSprite)
+            bulletSprite.destroy()
