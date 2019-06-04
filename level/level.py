@@ -23,9 +23,10 @@ class Level():
         self.screen = screen
 
     # 加载关卡，根据设计好的关卡内容生成单元等
-    def load(self):
+    def load(self, config):
         # 清空子弹列表
         self.bullet_sprites.empty()
+        self.background = tuple(config['globals']['background'])
 
     # 运行关卡
     def run(self):
@@ -36,7 +37,7 @@ class Level():
         self.__render()
 
     def __render(self):
-        self.screen.fill((230, 230, 230))
+        self.screen.fill(self.background)
         for unit in self.unit_list:
             unit.blitme(self.screen)
         for bullet in self.bullet_sprites:

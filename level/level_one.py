@@ -14,8 +14,8 @@ class LevelOne(Level):
         self.unit_exist_count = 0
         self.setting = Setting()
 
-    def load(self):
-        super().load()
+    def load(self, config):
+        super().load(config)
         rect = self.screen.get_rect()
         self.ship.set_poisition(
             {'centerx': rect.centerx, 'bottom': rect.bottom})

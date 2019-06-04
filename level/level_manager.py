@@ -1,4 +1,5 @@
 from level.level import Level
+from config import Config
 
 
 class LevelManager():
@@ -12,13 +13,14 @@ class LevelManager():
         self.screen = screen
         self.is_end = False
 
-    def load(self):
+    def load(self, configpath):
         self.is_end = False
         level_name = self.level_list[self.level_index]
         self.level = Level.create_level(level_name)
         self.level.set_ship(self.ship)
         self.level.set_screen(self.screen)
-        self.level.load()
+        config = Config()
+        self.level.load(config.load_config(configpath))
 
     def run(self):
         self.level.run()

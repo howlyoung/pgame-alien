@@ -16,7 +16,7 @@ def run_game():
     level_manager = LevelManager(ship, screen)
 
     while True:
-        level_manager.load()
+        level_manager.load('config.json')
         while level_manager.is_end is False:
             level_manager.run()
 
