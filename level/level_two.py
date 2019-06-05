@@ -10,7 +10,7 @@ class LevelTwo(Level):
 
     def __init__(self):
         super().__init__()
-        self.unit_type_list = {'Alien': 10}
+        # self.unit_type_list = {'Alien': 10}
         self.unit_current_count = 3
         self.unit_exist_count = 0
         self.setting = Setting()

@@ -3,6 +3,7 @@ from setting import Setting
 from unit.unit import Unit
 from level.level_manager import LevelManager
 import game_functions as gf
+from config import Config
 
 
 def run_game():
@@ -14,9 +15,10 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
     ship = Unit.create_unit('Ship')
     level_manager = LevelManager(ship, screen)
+    config = Config()
 
     while True:
-        level_manager.load('config.json')
+        level_manager.load(config.load_config('config.json'))
         while level_manager.is_end is False:
             level_manager.run()
 
