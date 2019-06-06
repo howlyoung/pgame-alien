@@ -16,9 +16,10 @@ def run_game():
     ship = Unit.create_unit('Ship')
     level_manager = LevelManager(ship, screen)
     config = Config()
+    config.load_config('config.json')
 
     while True:
-        level_manager.load(config.load_config('config.json'))
+        level_manager.load(config)
         while level_manager.is_end is False:
             level_manager.run()
 

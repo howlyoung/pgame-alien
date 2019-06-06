@@ -26,8 +26,8 @@ class Level():
     def load(self, config):
         # 清空子弹列表
         self.bullet_sprites.empty()
-        self.background = tuple(config['globals']['background'])
-        self.unit_type_list = config['unit']
+        self.background = config.get_background()
+        self.unit_type_list = config.get_unit_list()
 
     # 运行关卡
     def run(self):
