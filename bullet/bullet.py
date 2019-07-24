@@ -6,6 +6,8 @@ class Bullet():
 
     # 存放所有的子弹精灵，用于碰撞等检测
     overall_sprites = Group()
+    # 标识
+    flag = ''
 
     def __init__(self, setting):
         # 伤害量
@@ -59,6 +61,11 @@ class Bullet():
 
     def getTop(self):
         pass
+
+    @classmethod
+    def creaet_by_flag(ctl, flag):
+        if ctl.flag == flag:
+            pass
 
     # 获取全局子弹精灵列表
     @classmethod
