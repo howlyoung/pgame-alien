@@ -22,9 +22,10 @@ class Config():
                 s = configfile.read().rstrip()
                 config = json.loads(s)
             if prefix == '':
-                index = configpath
+                index = os.path.basename(configpath)
             else:
-                index = prefix + "." + configpath
+                # index = prefix + "." + os.path.basename(configpath)
+                index = os.path.basename(configpath)
 
             self.config[index] = config
 

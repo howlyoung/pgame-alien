@@ -1,19 +1,22 @@
+from base.base import Base
 
 
-class Arms():
+class Arms(Base):
     """武器类"""
 
     def __init__(self):
+        super().__init__()
+        setting = self.get_config()
         # 基础伤害量
-        self.damage = 0
+        self.damage = setting['damage']
         # 弹药上限
-        self.ammo_limit = 0
+        self.ammo_limit = setting['ammo_limit']
         # 剩余弹药数量
-        self.ammo_count = 0
+        self.ammo_count = setting['ammo_count']
         # 使用者
         self.owner = None
         # 可使用的子弹列表
-        self.bullet_list = []
+        self.bullet_list = setting['bullet_list']
         # 当前使用的子弹
         self.bullet_flag = ''
         pass

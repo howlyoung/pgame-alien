@@ -1,31 +1,35 @@
 from pygame.sprite import Group
+from base.base import Base
 
 
 # 子弹类的基类
-class Bullet():
+class Bullet(Base):
 
     # 存放所有的子弹精灵，用于碰撞等检测
     overall_sprites = Group()
     # 标识
     flag = ''
 
-    def __init__(self, setting):
+    def __init__(self):
         # 伤害量
+        super().__init__()
+        # 基类处获取配置
+        setting = self.get_config()
         self.damage = 0
         # 子弹精灵列表
         self.sprites = []
         # 子弹数量
-        self.allow = setting.allow
+        self.allow = setting['allow']
         # 伤害量
-        self.damage = setting.damage
+        self.damage = setting['damage']
         # 子弹速度
-        self.speed_factor = setting.speed_factor
+        self.speed_factor = setting['speed_factor']
         # 子弹宽度
-        self.width = setting.width
+        self.width = setting['width']
         # 子弹高度
-        self.height = setting.height
+        self.height = setting['height']
         # 子弹颜色
-        self.color = setting.color
+        self.color = setting['color']
         # 保存设置
         self.setting = setting
         # 发射子弹的对象

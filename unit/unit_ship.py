@@ -27,3 +27,5 @@ class UnitShip(Unit):
     def set_boundary(self, bound):
         self.left = bound['left']
         self.right = bound['right']
+
+

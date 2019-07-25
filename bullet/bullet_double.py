@@ -10,8 +10,8 @@ BulletNormalSetting = collections.namedtuple(
 
 class BulletDouble(Bullet):
 
-    def __init__(self, setting):
-        super().__init__(setting)
+    def __init__(self):
+        super().__init__()
 
     # 生成子弹精灵，将精灵加入子弹列表，返回子弹精灵，以便后续将其加入全局的精灵组
     def shoot_bullet(self):
