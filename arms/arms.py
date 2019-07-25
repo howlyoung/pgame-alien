@@ -6,6 +6,7 @@ class Arms(Base):
 
     def __init__(self):
         super().__init__()
+        # 获取配置
         setting = self.get_config()
         # 基础伤害量
         self.damage = setting['damage']
