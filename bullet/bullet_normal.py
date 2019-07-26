@@ -17,7 +17,7 @@ class BulletNormal(Bullet):
     # 生成子弹精灵，将精灵加入子弹列表，返回子弹精灵，以便后续将其加入全局的精灵组
     def shoot_bullet(self):
         if len(self.sprites) < self.allow:
-            bs = BulletSprite(self.setting, self)
+            bs = BulletSprite(self)
             self.sprites.append(bs)
             # self.add_overall_sprites(bs)
             return bs

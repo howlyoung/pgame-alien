@@ -1,20 +1,25 @@
 import pygame
 from pygame.sprite import Sprite
+from base.base import Base
 
 
-class BulletSprite(Sprite):
-    def __init__(self, ai_settings, bullet):
+class BulletSprite(Sprite, Base):
+    def __init__(self, bullet):
         super().__init__()
+        # 获取主配置
+        ai_settings = bullet.setting
         # 生成矩形
-        self.rect = pygame.Rect(0, 0, ai_settings.width, ai_settings.height)
+        self.rect = pygame.Rect(
+            0, 0, ai_settings['width'], ai_settings['height'])
+
         # 伤害量
         self.damage = 0
         # 指向子弹对象
         self.bullet = bullet
 
         # 设置颜色和速度
-        self.color = ai_settings.color
-        self.speed_factor = ai_settings.speed_factor
+        self.color = ai_settings['color']
+        self.speed_factor = ai_settings['speed_factor']
 
         self.rect.centerx = self.bullet.getCenterx()
         self.rect.top = self.bullet.getTop()

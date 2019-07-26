@@ -20,7 +20,10 @@ class Arms(Base):
         self.bullet_list = setting['bullet_list']
         # 当前使用的子弹
         self.bullet_flag = ''
-        pass
+        # 当前已发射还未消失的子弹列表
+        self.shoot_bullet_list = []
+        # 初始坐标
+        self.init_poisition = []
 
     def shoot(self):
         # 无子弹，不能发射

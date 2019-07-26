@@ -1,5 +1,6 @@
 from pygame.sprite import Group
 from base.base import Base
+import importlib
 
 
 # 子弹类的基类
@@ -34,6 +35,8 @@ class Bullet(Base):
         self.setting = setting
         # 发射子弹的对象
         self.owner = None
+        # 初始位置坐标
+        self.init_poisition = []
 
     # 设置子弹的对象
     def set_owner(self, owner):
@@ -50,6 +53,9 @@ class Bullet(Base):
             return True
         else:
             return False
+
+    def set_init_poisition(self, poisition):
+        self.init_poisition = poisition
 
     def shoot_bullet(self):
         pass
@@ -86,8 +92,10 @@ class Bullet(Base):
         ctl.overall_sprites.remove(sprites)
 
     @classmethod
-    def create_bullet(ctl, setting):
-        return ctl(setting)
+    def create_bullet(ctl, modulename, classname):
+        module = importlib.import_module(modulename)
+        cls = getattr(module, classname)
+        return cls()
 
     @classmethod
     def clear_list(cls):
