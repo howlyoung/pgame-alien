@@ -14,12 +14,15 @@ class Base():
         file = getattr(mod, '__file__', None)
         return file and os.path.splitext(os.path.basename(file))[0]
 
-    def get_config(self):
-        classname = self.__class__.__name__
-        if classname in self.config:
-            return self.config[classname]
+    def get_config(self, index=''):
+        if index == '':
+            classname = self.__class__.__name__
+            if classname in self.config:
+                return self.config[classname]
+            else:
+                return None
         else:
-            return None
+            return self.config[index]
 
     @classmethod
     def init_config(cls, config):

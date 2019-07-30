@@ -14,5 +14,9 @@ class Arms_normal(Arms):
             bullet = Bullet.create_bullet(
                 self.bullet_flag, self.bullet_list[self.bullet_flag])
             self.shoot_bullet_list.append(bullet)
+            poisition = self.get_shoot_poisition()
+            bullet.set_poisition(poisition)
+            bullet.set_owner(self.owner)
+            Bullet.add_overall_sprites(bullet)
         else:
             return False

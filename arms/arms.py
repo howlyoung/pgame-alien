@@ -46,3 +46,7 @@ class Arms(Base):
         else:
             self.ammo_count += count
         return True
+
+    # 获取发射时位置
+    def get_shoot_poisition(self):
+        return self.owner.get_poisition()

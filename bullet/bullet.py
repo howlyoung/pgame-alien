@@ -1,10 +1,12 @@
 from pygame.sprite import Group
 from base.base import Base
+from pygame.sprite import Sprite
 import importlib
+import pygame
 
 
 # 子弹类的基类
-class Bullet(Base):
+class Bullet(Base, Sprite):
 
     # 存放所有的子弹精灵，用于碰撞等检测
     overall_sprites = Group()
@@ -36,40 +38,29 @@ class Bullet(Base):
         # 发射子弹的对象
         self.owner = None
         # 初始位置坐标
-        self.init_poisition = []
+        self.poisition = []
+        # 生成矩形
+        self.rect = pygame.Rect(
+            0, 0, setting['width'], setting['height'])
 
     # 设置子弹的对象
     def set_owner(self, owner):
-        if self.owner:
-            # 如果已经被设置为其他对象的子弹，则将其从其他对象中清除
-            self.owner.remove_bullet(self)
         self.owner = owner
         return True
 
-    # 清除子弹设置
-    def clear_owner(self, owner):
-        if self.owner and self.owner == owner:
-            self.owner = None
-            return True
-        else:
-            return False
+    # 设置位置
+    def set_poisition(self, poisition):
+        self.poisition = poisition
 
-    def set_init_poisition(self, poisition):
-        self.init_poisition = poisition
+    # 设置位置
+    def get_poisition(self, poisition):
+        return self.poisition
 
-    def shoot_bullet(self):
+    # 更新子弹位置
+    def update(self):
         pass
 
     def hit_target(self, bulletsprite, target):
-        pass
-
-    def update_spriet_track(self, bulletSprite):
-        pass
-
-    def getCenterx(self):
-        pass
-
-    def getTop(self):
         pass
 
     @classmethod
